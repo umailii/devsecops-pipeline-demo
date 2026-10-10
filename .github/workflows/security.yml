@@ -69,7 +69,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Scan the Dockerfile for misconfigurations
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.36.0
         with:
           scan-type: config
           scan-ref: .
@@ -80,7 +80,7 @@ jobs:
         run: docker build -t notes-api:${{ github.sha }} .
 
       - name: Scan the image for vulnerabilities
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.36.0
         with:
           image-ref: notes-api:${{ github.sha }}
           severity: HIGH,CRITICAL
