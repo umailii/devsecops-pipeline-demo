@@ -47,7 +47,7 @@ The patch puts back the kinds of problems the pipeline exists to catch:
 | `subprocess.check_output(..., shell=True)` built from user input, and `debug=True` | Bandit |
 | Old pinned Flask and Werkzeug versions with known CVEs | pip-audit |
 | SQL built with an f-string | the unit test |
-| Old `python:3.8.0` base image, running as root | Trivy |
+| Dockerfile runs as root (no non-root `USER`), plus an old `python:3.8.0` base image | Trivy (the run flagged the root user, DS-0002) |
 
 Because the fake key is committed on that branch, it stays in that branch's history. That is why the failing branch is created from `main` and never merged back.
 
