@@ -62,14 +62,14 @@ I ran the checks locally against both versions before publishing:
 | pip-audit | no known vulnerabilities | 37 known vulnerabilities in 4 packages |
 | gitleaks | no leaks | 2 leaks found |
 
-The Trivy container jobs were not run locally. They run for the first time on GitHub.
+The Trivy container jobs ran on GitHub, and the results are in the linked runs below.
 
 ## Real runs on GitHub
 
 Add links or screenshots here after the first runs finish:
 
-- Passing run on `main`: *(link)*
-- Failing run on `demo/vulnerable`: *(link)*
+- Passing run on `main`: [Security pipeline #16](https://github.com/umailii/devsecops-pipeline-demo/actions/runs/38082921683)
+- Failing run on `demo/vulnerable`: [Security pipeline #17](https://github.com/umailii/devsecops-pipeline-demo/actions/runs/38083048747)
 
 ## Running it locally
 
