@@ -3,6 +3,7 @@
 import re
 import socket
 import sqlite3
+import subprocess
 from contextlib import contextmanager
 
 from flask import Flask, jsonify, request
@@ -51,22 +52,18 @@ def create_app(db_path=None):
         term = request.args.get("q", "")
         with db() as conn:
             rows = conn.execute(
-                "SELECT id, title, body FROM notes WHERE title LIKE ?", (f"%{term}%",)
+                f"SELECT id, title, body FROM notes WHERE title LIKE '%{term}%'"
             ).fetchall()
         return jsonify([dict(row) for row in rows])
 
     @app.get("/resolve")
     def resolve():
         host = request.args.get("host", "")
-        if not HOSTNAME.match(host):
-            return jsonify(error="invalid hostname"), 400
-        try:
-            return jsonify(host=host, address=socket.gethostbyname(host))
-        except socket.gaierror:
-            return jsonify(error="could not resolve host"), 404
+        output = subprocess.check_output(f"nslookup {host}", shell=True, text=True)
+        return jsonify(host=host, output=output)
 
     return app
 
 
 if __name__ == "__main__":
-    create_app().run(host="127.0.0.1", port=5000)
+    create_app().run(host="0.0.0.0", port=5000, debug=True)
