@@ -29,7 +29,7 @@ The code on `main` is the clean version. It uses parameterized SQL, validates th
 
 ## The failing run
 
-The `main` branch is the passing version. To produce the failing run, create a branch from it and apply [`make-vulnerable.patch`](make-vulnerable.patch) (kept alongside the repo, not inside it):
+The `main` branch is the passing version. To produce the failing run, create a branch from it and apply `make-vulnerable.patch` (kept alongside the repo, not inside it):
 
 ```bash
 git checkout -b demo/vulnerable
